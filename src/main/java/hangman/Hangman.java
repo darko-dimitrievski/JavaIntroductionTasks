@@ -6,6 +6,8 @@ package hangman;
  */
 public class Hangman {
 
+    // TODO: can be private.
+    // TODO: can be final.
     DataReader reader;
 
     public Hangman(final DataReader reader) {

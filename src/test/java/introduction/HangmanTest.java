@@ -12,8 +12,13 @@ import hangman.Hangman;
 
 
 /**
- * @author darko.dimitrievski
+ * TODO: the tests should follow the packet structure of the classes.
+ * <p>
+ * TODO: you can write as a javadoc which class you are testing.
+ * <p>
+ * TODO: for all logic you have only one test per method. What is you coverage? Can you think of what else can be tested?
  *
+ * @author darko.dimitrievski
  */
 public class HangmanTest {
 
@@ -25,8 +30,10 @@ public class HangmanTest {
 
         DataReader dataReader = new DataReader("hello world", input);
 
+        // TODO: not used.
         Hangman hangman = new Hangman(dataReader);
 
+        // TODO: you are exposing letters for the sake of the tests this is wrong.
         Assert.assertEquals("h", DataReader.letters.get(0) + "");
         Assert.assertEquals("e", DataReader.letters.get(1) + "");
         Assert.assertEquals("l", DataReader.letters.get(2) + "");

@@ -3,4 +3,5 @@
   <groupId>com.java.training</groupId>
   <artifactId>java-training</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+    <!-- TODO: Missing juni dependency here. -->
 </project>

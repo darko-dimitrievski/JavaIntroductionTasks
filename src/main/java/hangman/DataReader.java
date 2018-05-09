@@ -7,14 +7,23 @@ import java.util.List;
 
 
 /**
- * @author darko.dimitrievski
+ * TODO: The idea here was to have ONLY the reading. Now you have all your hangman logic here. Leave only the reading
+ * here and extract the play logic in {@link Hangman}. Now your {@link Hangman} class is absolutely redundant.
+ * <p>
+ * TODO: Mising the target folder in the .gitignore.
  *
+ * @author darko.dimitrievski
  */
 public class DataReader implements Reader {
 
+    // TODO: can be final.
     public static List<Character> letters = new ArrayList<Character>();
 
-    public String      wordToGuess;
+    // TODO: can be private.
+    // TODO: can be final.
+    public String wordToGuess;
+    // TODO: can be private.
+    // TODO: can be final.
     public InputStream input;
 
     public DataReader(final String wordToGuess, final InputStream input) throws IOException {
@@ -24,11 +33,12 @@ public class DataReader implements Reader {
     }
 
     /**
+     * TODO: refactor as described above.
+     * <p>
      * Guess the hidden word
      *
      * @param wordToGuess
      * @param input
-     *
      */
     public void guessTheWord(final String wordToGuess, final InputStream input) throws IOException {
         char[] filterdWord = new char[wordToGuess.length()];
@@ -50,6 +60,7 @@ public class DataReader implements Reader {
         System.out.println();
         char data = (char) input.read();
         boolean isWordGuessed = false;
+        // TODO: When can data be -1?
         while (!isWordGuessed && (data != -1)) {
             char guessedLetter = data;
             if (wordToGuess.contains(guessedLetter + "")) {

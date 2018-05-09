@@ -1,8 +1,9 @@
 package sumContiguousSubarray;
 
 /**
- * @author darko.dimitrievski
+ * TODO: Missing javadoc.
  *
+ * @author darko.dimitrievski
  */
 public class SumContiguousSubarray {
     /**
@@ -15,6 +16,7 @@ public class SumContiguousSubarray {
         int maxSum = Integer.MIN_VALUE;
         int nextNumber = 0;
 
+        // TODO: can be replaced with foreach.
         for (int i = 0; i < contiguousSubarray.length; i++) {
             nextNumber = nextNumber + contiguousSubarray[i];
             maxSum = (maxSum < nextNumber) ? nextNumber : maxSum;
@@ -23,8 +25,9 @@ public class SumContiguousSubarray {
         return maxSum;
     }
 
+    // TODO: Do you really need this if you have an unit test?
     public static void main(final String[] args) {
-        int[] d = { -2, -3, 4, -1, -6, 1, 5, -3, 4, 5, 7, -3 };
+        int[] d = {-2, -3, 4, -1, -6, 1, 5, -3, 4, 5, 7, -3};
         System.out.println(SumContiguousSubarray.maxSumContiguousSubarrayTest(d));
     }
 }

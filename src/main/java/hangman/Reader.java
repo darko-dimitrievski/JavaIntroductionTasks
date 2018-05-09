@@ -8,9 +8,12 @@ import java.io.InputStream;
 
 
 /**
- * @author darko.dimitrievski
+ * TODO: missing javadoc.
  *
+ * @author darko.dimitrievski
  */
+// TODO: can be package private.
 public interface Reader {
+    // TODO: public is redundant for interface methods.
     public void guessTheWord(String wordToGuess, InputStream input) throws IOException;
 }
