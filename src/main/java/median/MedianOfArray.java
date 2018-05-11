@@ -1,10 +1,10 @@
 package median;
 
-// TODO: The 3 classes: MedianOfArray, MergeSortAlgorithm and SumContiguousSubarray all have methods that do something
-// with arrays. A good idea would be to merge them into sinngle class ArrayUtils and have the logic there.
-
 /**
- * TODO: Missing javadoc.
+ * <h1>Find index of the median of element of an array!</h1>
+ * A median is such an element that the
+ * difference of the sums of the elements
+ * in the left and the right are equal.
  *
  * @author darko.dimitrievski
  */
@@ -12,33 +12,45 @@ public class MedianOfArray {
 
     /**
      * Finds the index of the median of element of an array.
-     * <p>
-     * <p>
-     * TODO: the parameter name is wrong. Also array is a good name, not sure why you have changed it.
      *
-     * @param array of integers findMedianArray
+     * @param numbers array of integers
      * @return index of the median.
      */
-    public static int findIndexOfMedianOfAnArray(final int[] findMedianArray) {
+    public static int findMedianIndex(final int[] numbers) {
+        int sum = 0;
         int median = 0;
-        // TODO: your algorithm has time complexity of O(n^2) it can be O(n). Think how you can improve it.
-        // TODO: also here the problem is with the task description, but every array has a median. We just seek the
-        // minimum difference between the two sums.
-        for (int i = 0; i < (findMedianArray.length - 1); i++) {
-            int medianIndex = i + 1;
-            // TODO: leftSum and rightSum would be better names.
-            int firstHalfSubarraySum = 0;
-            for (int k = 0; k < medianIndex; k++) {
-                firstHalfSubarraySum += findMedianArray[k];
+        int sumRight = 0;
+        int sumLeft = 0;
+        int lowestSumDifference = Integer.MAX_VALUE;
+        int closestToMedian = 0;
+        for (Integer element : numbers) {
+            sum += element.intValue();
+        }
+
+        if (numbers.length != 1) {
+            for (int i = 0; i < (numbers.length - 1); i++) {
+                sumLeft += numbers[i];
+                
+                int nextIndex = i + 1;
+                sumRight = sum - numbers[nextIndex] - sumLeft;
+
+                if (lowestSumDifference >  Math.abs(sumLeft - sumRight)) {
+                    lowestSumDifference =  Math.abs(sumLeft - sumRight);
+                    closestToMedian = median++;
+                }
+
+                if (sumRight == sumLeft) {
+                    median = nextIndex;
+                    break;
+                }
+
+                if (nextIndex == (numbers.length - 1)) {
+                    median = closestToMedian;
+                    break;
+                }
             }
-            median = findMedianArray[medianIndex];
-            int secondHalfSubarraySum = 0;
-            for (int j = i + 2; j < findMedianArray.length; j++) {
-                secondHalfSubarraySum += findMedianArray[j];
-            }
-            if (firstHalfSubarraySum == secondHalfSubarraySum) {
-                break;
-            }
+        } else {
+            median = numbers[0];
         }
         return median;
     }

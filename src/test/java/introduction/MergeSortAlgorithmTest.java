@@ -1,7 +1,6 @@
 /**
  *
  */
-// TODO: remove this trailing comment.
 package introduction;
 
 import org.junit.Assert;
@@ -11,9 +10,8 @@ import mergeSort.MergeSortAlgorithm;
 
 
 /**
- * TODO: you can write as a javadoc which class you are testing.
- *
  * @author darko.dimitrievski
+ *
  */
 public class MergeSortAlgorithmTest {
 
@@ -22,11 +20,11 @@ public class MergeSortAlgorithmTest {
      */
     @Test
     public void test() {
-        int[] firstHalfSubarray = {1, 3, 5};
-        int[] secondHalfSubarray = {2, 4, 6};
+        int[] unsortedArray = { 1, 3, 5, 2, 4, 6 };
 
-        int[] expectedArray = {1, 2, 3, 4, 5, 6};
-        int[] actualArray = MergeSortAlgorithm.merge(firstHalfSubarray, secondHalfSubarray);
+        int[] expectedArray = { 1, 2, 3, 4, 5, 6 };
+        MergeSortAlgorithm mergesort = new MergeSortAlgorithm();
+        int[] actualArray = mergesort.merge(unsortedArray);
 
         Assert.assertArrayEquals(actualArray, expectedArray);
 

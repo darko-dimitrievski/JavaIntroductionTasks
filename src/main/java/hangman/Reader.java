@@ -8,12 +8,11 @@ import java.io.InputStream;
 
 
 /**
- * TODO: missing javadoc.
+ * Interface for different types of input streams
+ * (FileInputStream, BufferedInputStream and the PushbackInputStream among others).
  *
  * @author darko.dimitrievski
  */
-// TODO: can be package private.
 public interface Reader {
-    // TODO: public is redundant for interface methods.
-    public void guessTheWord(String wordToGuess, InputStream input) throws IOException;
+    public Character read(InputStream stream) throws IOException;
 }

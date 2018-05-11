@@ -3,27 +3,38 @@
  */
 package introduction;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import median.MedianOfArray;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 
 /**
- * TODO: you can write as a javadoc which class you are testing.
- *
  * @author darko.dimitrievski
+ *
  */
 public class MedianOfArrayTest {
 
-    int[] findMedianArray = {2, 3, 1, 5, 4, 2};
-    int actualMedian = 5;
+
 
     /**
      * Comparing the actual and the expected index of the median
      */
     @Test
-    public void findIndexOfMedianOfAnArrayTest() {
-        Assertions.assertEquals(MedianOfArray.findIndexOfMedianOfAnArray(findMedianArray), actualMedian);
+    public void test_median() {
+        int[] findMedianArray = { 1, 2, 3, 4, 1, 5 };
+        int   actualMedianIndex    = 3;
+        Assert.assertEquals(MedianOfArray.findMedianIndex(findMedianArray), actualMedianIndex);
+    }
+    
+    /**
+     * Comparing the actual and the expected index of the median
+     */
+    @Test
+    public void test_closeMedian() {
+        int[] findMedianArray = { 1, 2, 3, 1, 5 };
+        int   closeMedianIndex    =  2;
+        Assert.assertEquals(MedianOfArray.findMedianIndex(findMedianArray), closeMedianIndex);
     }
 
 }

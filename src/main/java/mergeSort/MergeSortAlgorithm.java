@@ -1,60 +1,94 @@
-/**
- *
- */
 package mergeSort;
 
+import java.util.Arrays;
+
+import org.apache.commons.lang.ArrayUtils;
+
 /**
- * TODO: Missing javadoc.
+ * <h1>Merge sort algorithm!</h1> Implement a merge sort algorithm. <b>Note:</b>
+ * Read what the difference is between merge and quick sort.
  *
  * @author darko.dimitrievski
  */
 public class MergeSortAlgorithm {
 
-    // TODO: I want to sort an awway, not two arrays :D The method should take a single parameter that is an array.
-    public static void main(final String[] args) {
-        int[] n = {1, 3, 5};
-        int[] m = {2, 4, 6};
-        MergeSortAlgorithm.merge(n, m);
-    }
+	private int indexToBeRemoved = 0;
+	
+	public int getIndexToBeRemoved() {
+		return indexToBeRemoved;
+	}
 
-    /**
-     * TODO: Not only merges but rather than sorts.
-     * <p>
-     * Merges two subarrays into one
-     *
-     * @param firstHalfSubarray
-     * @param secondHalfSubarray
-     * @return sorted merged array
-     */
-    public static int[] merge(final int[] firstHalfSubarray, final int[] secondHalfSubarray) {
-        int[] sortedArray = new int[firstHalfSubarray.length + secondHalfSubarray.length];
-        // TODO: one per line is better practice, makes the code more easy to read.
-        int counterFirstHalfSubarray = 0, counterSecondHalfSubarray = 0, counterSortedArray = 0;
+	public void setIndexToBeRemoved(int indexToBeRemoved) {
+		this.indexToBeRemoved = indexToBeRemoved;
+	}
 
-        while ((counterFirstHalfSubarray < firstHalfSubarray.length) && (counterSecondHalfSubarray < secondHalfSubarray.length)) {
-            if (firstHalfSubarray[counterFirstHalfSubarray] <= secondHalfSubarray[counterSecondHalfSubarray]) {
-                sortedArray[counterSortedArray] = firstHalfSubarray[counterFirstHalfSubarray];
-                counterFirstHalfSubarray++;
-            } else {
-                sortedArray[counterSortedArray] = secondHalfSubarray[counterSecondHalfSubarray];
-                counterSecondHalfSubarray++;
-            }
-            counterSortedArray++;
-        }
+	public static void main(final String[] args) {
+		int[] n = { 1, 4, 5, 6, 2, 4, 1, 8 };
+		MergeSortAlgorithm m = new MergeSortAlgorithm();
+		System.out.println(m.merge(n));
+	}
 
-        // TODO: repeating code here.
-        while (counterFirstHalfSubarray < firstHalfSubarray.length) {
-            sortedArray[counterSortedArray] = firstHalfSubarray[counterFirstHalfSubarray];
-            counterFirstHalfSubarray++;
-            counterSortedArray++;
-        }
+	/**
+	 * Unsorted array is sorted with mergesort
+	 *
+	 * @param unsorted
+	 *            array
+	 * @return sorted merged array
+	 */
+	public int[] merge(final int[] unsortedArray) {
+		int[] sortedArray = new int[unsortedArray.length];
 
-        while (counterSecondHalfSubarray < secondHalfSubarray.length) {
-            sortedArray[counterSortedArray] = secondHalfSubarray[counterSecondHalfSubarray];
-            counterSecondHalfSubarray++;
-            counterSortedArray++;
-        }
+		int[] leftSubarray = new int[unsortedArray.length / 2];
+		int[] rightSubarray = new int[unsortedArray.length / 2];
 
-        return sortedArray;
-    }
+		for (int numberElements = 0; numberElements < unsortedArray.length/2; numberElements ++) {
+			leftSubarray[numberElements] = unsortedArray[numberElements];
+			rightSubarray[numberElements] = unsortedArray[(unsortedArray.length/2 + numberElements)];
+		}
+		
+		int elementsLeftSubarray = 0;
+		int elementsRightSubarray = 0;
+		int counterSortedArray = 0;
+		
+		while ((elementsLeftSubarray < leftSubarray.length) && (elementsRightSubarray < rightSubarray.length)) {
+			int smallestFromLeft = smallestElementInArray(leftSubarray);
+			int smallestFromRight = smallestElementInArray(rightSubarray);
+			if (smallestFromLeft <= smallestFromRight) {
+				sortedArray[counterSortedArray] = smallestFromLeft;
+				leftSubarray = ArrayUtils.remove(leftSubarray, getIndexToBeRemoved());
+			} else {
+				sortedArray[counterSortedArray] = smallestFromRight;
+				rightSubarray = ArrayUtils.remove(rightSubarray, getIndexToBeRemoved());
+			}
+			counterSortedArray++;
+		}
+
+		while (elementsLeftSubarray < leftSubarray.length) {
+			sortedArray[counterSortedArray] = leftSubarray[elementsLeftSubarray];
+			elementsLeftSubarray++;
+			counterSortedArray++;
+		}
+
+		while (elementsRightSubarray < rightSubarray.length) {
+			sortedArray[counterSortedArray] = rightSubarray[elementsRightSubarray];
+			elementsRightSubarray++;
+			counterSortedArray++;
+		}
+
+		for (int i=0; i<sortedArray.length; i++) {
+			System.out.println(sortedArray[i]);
+		}
+		return sortedArray;
+	}
+	
+	public int smallestElementInArray (int [] numbers) {
+		int smallest = Integer.MAX_VALUE;
+		for(int i=0; i<numbers.length; i++) {
+			if (smallest > numbers[i]) {
+				smallest = numbers[i];
+				setIndexToBeRemoved(i);
+			}
+		}
+		return smallest;
+	}
 }
